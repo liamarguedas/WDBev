@@ -1,0 +1,26 @@
+body {
+    background-color: black;
+}
+
+#main-div {
+    text-align: center;
+    margin-top: 4rem
+}
+
+#abacate-img {
+    border: 5px solid white;
+
+}
+
+.font {
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+}
+
+#title {
+    font-weight: 700;
+}
+
+#subtitle {
+    font-weight: 400;
+}
