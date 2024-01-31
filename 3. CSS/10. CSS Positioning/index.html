@@ -5,13 +5,62 @@
   <title>CSS Positioning Exercise</title>
   <style>
     /* Write your code here */
+    .blue-box {
+      background: blue;
+      height: 300px;
+      width: 500px;
+      position: relative;
+      left: 200px;
+      top: 200px;
+
+    }
+
+    .red-circle-1 {
+      background-color: red;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      position: relative;
+      top: 100px;
+      left: 275px;
+    }
+
+  .red-circle-2 {
+      background-color: red;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      position: relative;
+      top: -100px;
+      left: 25px
+  }
+
+  .window-1 {
+    background-color: white;
+    width: 150px;
+    height: 100px;
+    position: relative;
+    top: 40px;
+  }
+  
+  .antena {
+    background-color: black;
+    width: 30px;
+    height: 70px;
+    position: absolute;
+    top: -70px;
+    left: 30px;
+  }
+
   </style>
 </head>
 
 <body>
   <div class="blue-box">
-    <div class="red-circle">
-    </div>
+    <div class="window-1"></div>
+    <div class="red-circle-1"></div>
+    <div class="red-circle-2"></div>
+    <div class="antena"></div>
   </div>
 
 </body>
