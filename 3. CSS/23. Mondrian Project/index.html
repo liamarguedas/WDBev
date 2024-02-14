@@ -19,40 +19,73 @@
     HINT: Remember you can't change the properties of grid lines.
     But grid lines are transparent!
     */
+body{
 
-    .conteiner {
-      display: grid;
-      grid-template-columns: 2fr 2fr 1fr;
-    }
+}
+.container {
+  display: grid;
+  grid-template-columns: 320px 198px 153px 50px;
+  grid-template-rows: 414px 140px 155px 20px;
+  width: 748px;
+  height: 756px;
+  gap: 9px;
+  background-color: #000;
+}
 
-    .red {
-      height: 414px;
-      width: 320px;
-      background-color: red;
-    }
+.square {
+  background-color: #F0F1EC;
+}
+
+.red {
+  background-color: #E72F24;
+}
+
+.yellow {
+  background-color: #F9D01E;
+}
+
+.blue {
+  background-color: #004592;
+  height: 130px;
+  border-bottom: 10px;
+  border-color: black;
+}
+
+.black {
+  background-color: #232629;
+}
+
+.three-column {
+  grid-column: span 3;
+}
+
+.two-column {
+  grid-column: span 2;
+}
+
+.two-row {
+  grid-row: span 2;
+}
+
+
+
+
 
   </style>
 </head>
 
 <body>
-<div class="conteiner">
-  <div class="item red"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-  <div class="item"></div>
-</div>
-
+  <div class="container">
+    <div class="square red"></div>
+    <div class="square three-column"></div>
+    <div class="square two-row"></div>
+    <div class="square two-column two-row"></div>
+    <div class="square blue"></div>
+    <div class="square two-row"></div>
+    <div class="square"></div>
+    <div class="square yellow"></div>
+    <div class="square black"></div>
+  </div>
   <!-- Write your HTML here -->
 </body>
 
