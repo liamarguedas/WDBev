@@ -1,0 +1,53 @@
+body {
+    background-color: #35353F;
+}
+
+.main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 95vh;
+}
+
+.game-div {
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    grid-template-rows: 100px 300px;
+    gap: 50px;
+}
+
+.text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+h1 {
+    margin: 30px;
+    padding: 0px;
+    font-family: 'Lobster', cursive;
+    text-shadow: 5px 0 #232931;
+    font-size: 5rem;
+    color: #4ECCA3;
+}
+h1:hover {
+    cursor: pointer;
+}
+
+.player {
+    text-align: center;
+    font-size: 3rem;
+    color: #4ECCA3;
+    font-family: 'Indie Flower', cursive;
+}
+
+.game-info {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    font-family: 'Indie Flower', cursive;
+}
