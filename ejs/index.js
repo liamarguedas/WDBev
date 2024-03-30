@@ -13,7 +13,8 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-  res.send(`<h1> ${dayAction()} </h1>`);
+  let _message = dayAction();
+  res.render("./index.ejs", { message: _message });
 });
 
 app.listen(port, () => {
