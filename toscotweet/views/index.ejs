@@ -6,7 +6,7 @@
 	<form action="/submit" method="POST">
 	<input type="text" name="tweet">
 	<input type="submit" value="Tweet">
-
+</form>
 </div>
 
 <div class="main-container"> 
@@ -24,16 +24,27 @@
 		<% } %>
 	</div>
 
-	<div class="tweet-display">
+	<div class="tweet-display"> 
 		
 
-		<% if (locals.tweet){ %>
-			<p> <%= tweet %> </p>
+		<% if (locals.tweet_text){ %>
+			  <% if (locals.edit) { %>
+ 
+              <form action="/edit_tweet/<%= tweet_id %>" method="POST">
+            	<input type="text" name="edited_tweet" value="<%= tweet_text %>">
+	            <input type="submit" value="Save">
+ 			        <a href="/delete/<%= tweet_id %>"> <h3> Delete </h2> </a>
+            </form> 
+       <% } else { %>
+        
+        <h1> <%= tweet_text %> <br> </h1>
 
-			<a h
+			<a href="/edit/<%= tweet_id %>"> <h2> Edit </h2> </a>
+ 			<a href="/delete/<%= tweet_id %>"> <h3> Delete </h2> </a>
 
 			<% } %>
 
+			<% } %>
 
 	</div>
 

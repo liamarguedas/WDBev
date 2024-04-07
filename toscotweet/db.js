@@ -50,6 +50,7 @@ export default class Database {
       });
     });
   }
+
   filterSingleRow(column = "public_id", value) {
     return new Promise((resolve, reject) => {
       let sql = `SELECT * FROM tweets WHERE ${column} = ?`;
@@ -63,22 +64,28 @@ export default class Database {
     });
   }
 
-  // filterSingleRow(column = "public_id", value) {
-  //   return new Promise((resolve, reject) => {
-  //     let sql = (`SELECT * FROM tweets WHERE ${column} = ?`, value);
-  //     this.db.all(sql, [], (err, rows) => {
-  //       if (err) {
-  //         reject(err);
-  //       } else {
-  //         resolve(rows);
-  //       }
-  //     });
-  //   });
-  // }
-
   deleteDataFilter(column = "public_id", value) {
     this.db.serialize(() => {
-      this.db.run(`DELETE FROM tweet WHERE ${column} = ?`, value);
+      this.db.run(`DELETE FROM tweets WHERE ${column} = ?`, value);
+    });
+  }
+
+  cleanDataBase() {
+    this.db.serialize(() => {
+      this.db.run("DELETE FROM tweets");
+    });
+  }
+
+  editDataRow(filterColumn = "public_id", filterValue, newTweet, newTitle) {
+    return new Promise((resolve, reject) => {
+      let sql = `UPDATE tweets SET tweet = ?, title = ? WHERE ${filterColumn} = ?`;
+      this.db.run(sql, [newTweet, newTitle, filterValue], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
     });
   }
 
