@@ -14,10 +14,25 @@
 	<div class="right-menu"> 
 		<h1> All tweets </h1>
 
+		<% if (locals.tweets_title){ %>
+
+				<% for (let i = 0; i < tweets_title.length; i++) { %>
+		
+				<a href="/showTweet/<%= tweets_ids[i] %>"> <h3> <%= tweets_title[i] %> <br> </h3> </a>
+			
+			<% } %>
+		<% } %>
 	</div>
 
 	<div class="tweet-display">
 		
+
+		<% if (locals.tweet){ %>
+			<p> <%= tweet %> </p>
+
+			<a h
+
+			<% } %>
 
 
 	</div>

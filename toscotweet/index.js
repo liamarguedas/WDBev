@@ -29,17 +29,21 @@ app.get("/", (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/submit", (req, res) => {
-  const userTweet = req.body.tweet;
-  const userEntry = new Tweet(userTweet);
-
-  console.log(userEntry.id);
-  console.log(userEntry.text);
-  console.log(userEntry.getTitle());
-
+  const userEntry = new Tweet(req.body.tweet);
   userEntry.storeTweet();
-
   res.render("./index.ejs", {
     tweets_title: tweets.map((entry) => entry.title),
+    tweets_ids: tweets.map((entry) => entry.id),
+  });
+});
+
+app.get("/showTweet/:id", (req, res) => {
+  let tweetId = parseInt(req.params.id);
+  let renderTweet = tweets.filter((entry) => entry.id === tweetId)[0].tweet;
+  res.render("./index.ejs", {
+    tweets_title: tweets.map((entry) => entry.title),
+    tweets_ids: tweets.map((entry) => entry.id),
+    tweet: renderTweet,
   });
 });
 
