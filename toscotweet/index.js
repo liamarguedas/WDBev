@@ -1,6 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import crypto from "crypto";
+import Database from "./db.js";
+
+const db = new Database();
+db.createTable();
 
 const tweets = []; // CHANGE TO DB SQL AFTER TESTING
 const app = express();
@@ -17,33 +21,48 @@ class Tweet {
   }
 
   storeTweet() {
-    tweets.push({ id: this.id, title: this.getTitle(), tweet: this.text });
+    db.insertData(this.id, this.getTitle(), this.text);
   }
 }
 
 app.use(express.static("public"));
 
+// HOMEPAGE ---------------------------
 app.get("/", (req, res) => {
   res.render("./index.ejs");
 });
 
+// TWEET SENT -------------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/submit", (req, res) => {
+app.post("/submit", async (req, res) => {
   const userEntry = new Tweet(req.body.tweet);
   userEntry.storeTweet();
+
+  const ids = await db.selectDataColumn("public_id");
+
+  const titles = await db.selectDataColumn("title");
+
   res.render("./index.ejs", {
-    tweets_title: tweets.map((entry) => entry.title),
-    tweets_ids: tweets.map((entry) => entry.id),
+    tweets_title: titles.map((entry) => entry.title),
+    tweets_ids: ids.map((entry) => entry.public_id),
   });
 });
 
-app.get("/showTweet/:id", (req, res) => {
+app.get("/showTweet/:id", async (req, res) => {
   let tweetId = req.params.id;
-  let renderTweet = tweets.filter((entry) => entry.id === tweetId)[0].tweet;
+
+  const dataRow = await db.filterSingleRow("public_id", tweetId);
+
+  const ids = await db.selectDataColumn("public_id");
+
+  const titles = await db.selectDataColumn("title");
+
+  const renderTweet = dataRow[0].tweet;
+
   res.render("./index.ejs", {
-    tweets_title: tweets.map((entry) => entry.title),
-    tweets_ids: tweets.map((entry) => entry.id),
+    tweets_title: titles.map((entry) => entry.title),
+    tweets_ids: ids.map((entry) => entry.public_id),
     tweet: renderTweet,
   });
 });
