@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import crypto from "crypto";
 
 const tweets = []; // CHANGE TO DB SQL AFTER TESTING
 const app = express();
@@ -8,7 +9,7 @@ const port = 3000;
 class Tweet {
   constructor(text) {
     this.text = text;
-    this.id = tweets.length + 1;
+    this.id = crypto.randomUUID();
   }
 
   getTitle(numberOfChars = 30) {
@@ -38,7 +39,7 @@ app.post("/submit", (req, res) => {
 });
 
 app.get("/showTweet/:id", (req, res) => {
-  let tweetId = parseInt(req.params.id);
+  let tweetId = req.params.id;
   let renderTweet = tweets.filter((entry) => entry.id === tweetId)[0].tweet;
   res.render("./index.ejs", {
     tweets_title: tweets.map((entry) => entry.title),
