@@ -21,9 +21,9 @@
         <h3>Ingredients:</h3>
         <ul id="ingredientsList">
         <li> <%= protein.name %>, <%= protein.preparation %></li>
-          <li> <%= salsa.name %> , <%= salsa.spiciness %> </li>
-          <% for (let i = 0; i <= toppings.length; i++) { %> 
-            <li><%= toppings[i].name %>, <%= toppings[i].quantity %> </li>
+        <li> <%= salsa.name %> , <%= salsa.spiciness %> </li>
+          <% for(let i = 0; i <= toppings.length; i++) { %> 
+            <li> <%= toppings[i].name %>, <%= toppings[i].quantity %> </li>
 
           <% } %>  
        </ul>

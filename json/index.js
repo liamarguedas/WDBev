@@ -27,7 +27,6 @@ app.post("/recipe", (req, res) => {
         protein: chickenRecipe.ingredients.protein,
         salsa: chickenRecipe.ingredients.salsa,
         toppings: chickenRecipe.ingredients.toppings,
-        toppings_len: chickenRecipe.ingredients.toppings.length,
       });
 
     case "beef":
