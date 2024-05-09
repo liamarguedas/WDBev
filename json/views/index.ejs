@@ -20,11 +20,13 @@
         <h2> <%= recipeName %> </h2>
         <h3>Ingredients:</h3>
         <ul id="ingredientsList">
-          <li> <%= pr %></li>
-          <!-- <li>Protein name, protein preparation</li> -->
-          <!-- <li>Salsa name</li> -->
-          <!-- <li>Every other topping</li> -->
-        </ul>
+        <li> <%= protein.name %>, <%= protein.preparation %></li>
+          <li> <%= salsa.name %> , <%= salsa.spiciness %> </li>
+          <% for (let i = 0; i <= toppings.length; i++) { %> 
+            <li><%= toppings[i].name %>, <%= toppings[i].quantity %> </li>
+
+          <% } %>  
+       </ul>
 
 
       <% } else { %>
