@@ -32,8 +32,22 @@ app.get("/filter", (req, res) => {
 });
 
 //4. POST a new joke
+app.post("/jokes", (req, res) => {
+  let newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  jokes.push(newJoke);
+  res.json(newJoke);
+});
 
 //5. PUT a joke
+app.put("/jokes/:id", (req, res) => {
+  jokes[parseInt(req.params.id) - 1].jokeText = req.body.text;
+  jokes[parseInt(req.params.id) - 1].jokeType = req.body.type;
+  res.json(jokes[parseInt(req.params.id) - 1]);
+});
 
 //6. PATCH a joke
 
