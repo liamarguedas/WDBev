@@ -50,6 +50,10 @@ app.put("/jokes/:id", (req, res) => {
 });
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req, res) => {
+  jokes[parseInt(req.params.id) - 1].jokeType = req.body.type;
+  res.json(jokes[parseInt(req.params.id) - 1]);
+});
 
 //7. DELETE Specific joke
 
