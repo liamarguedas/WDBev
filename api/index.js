@@ -21,8 +21,7 @@ app.get("/jokes/:id", (req, res) => {
   }
 });
 
-//3. GET a jokes by filtering on the joke type
-app.get("/filter", (req, res) => {
+//3. GET a jokes by filtering on the joke type app.get("/filter", (req, res) => {
   if (req.query.type) {
     let jokesOfType = jokes.filter(
       (joke) => joke["jokeType"] === req.query.type,
@@ -49,15 +48,29 @@ app.put("/jokes/:id", (req, res) => {
   res.json(jokes[parseInt(req.params.id) - 1]);
 });
 
-//6. PATCH a joke
 app.patch("/jokes/:id", (req, res) => {
-  jokes[parseInt(req.params.id) - 1].jokeType = req.body.type;
-  res.json(jokes[parseInt(req.params.id) - 1]);
+ 
+  let id = parseInt(req.params.id) - 1; 
+  let originalJokeType = jokes[id].jokeType;
+  let originalJokeText = jokes[id].jokeText;
+
+  jokes[id].jokeType = req.body.type || originalJokeType;
+  jokes[id].jokeText = req.body.text || originalJokeText;
+  
+  res.json(jokes[id]);
 });
 
-//7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const searchIndex = jokes.findIndex((joke) => joke.id === id);
 
-//8. DELETE All jokes
+  if (searchIndex > -1) {
+    jokes.splice(searchIndex, 1 );
+    res.sendStatus(200);
+  } else {
+    res.status(400).json({error: `${id} failed. Try again with different parameter`})
+  }
+})
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
