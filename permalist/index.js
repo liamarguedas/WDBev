@@ -20,15 +20,15 @@ db.connect();
 
 let items = new Array();
 
-db.query("SELECT * FROM items", (err, res) => {
-  if (err) {
-    console.log("Error executing query");
-  } else {
-    items = res.rows;
-  }
-});
+app.get("/", async (req, res) => {
+  await db.query("SELECT * FROM items", (err, res) => {
+    if (err) {
+      console.log("Error executing query");
+    } else {
+      items = res.rows;
+    }
+  });
 
-app.get("/", (req, res) => {
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: items,
@@ -45,21 +45,25 @@ app.post("/add", async (req, res) => {
   const dbRes = await db.query(text, posting);
 });
 
-app.post("/edit", (req, res) => {
-  const item = req.body.newItem;
+app.post("/edit", async (req, res) => {
+  const item = req.body.updatedItemTitle;
+  const id = req.body.updatedItemId;
 
-  items.push({ title: item });
+  const query = "UPDATE items SET title = ($1) WHERE id = $2";
+  const dbRes = await db.query(query, [item, parseInt(id)]);
   res.redirect("/");
-
-  const text =
-    "UPDATE items WHERE SET INSERT INTO items(title) VALUES($1) RETURNING *";
-  const posting = [item];
 });
 
-app.post("/delete", (req, res) => {});
+app.post("/delete", async (req, res) => {
+  const item = req.body.updatedItemTitle;
+  const id = req.body.updatedItemId;
+
+  const query = "DELETE FROM items WHERE id = $1";
+  const dbRes = await db.query(query, [parseInt(id)]);
+
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-function getItems(sql) {}
